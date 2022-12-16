@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="uap.jnlp">
+  <information>
+    <title>uap</title>
+    <vendor>A S U S</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="lib\sqlite-jdbc-3.40.0.0.jar" size="12760211" download="eager" />
+    <jar href="uap.jar" size="12741504" download="eager" />
+  </resources>
+  <jfx:javafx-desc  width="800" height="600" main-class="uap.Uap"  name="uap" />
+  <update check="always"/>
+</jnlp>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DaftarProdukController">
+   <children>
+      <TabPane layoutX="-2.0" layoutY="-3.0" prefHeight="600.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Makanan">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="379.0" prefWidth="793.0">
+                     <children>
+                        <TableView fx:id="tbl_makanan" layoutX="14.0" layoutY="54.0" prefHeight="503.0" prefWidth="781.0">
+                          <columns>
+                            <TableColumn fx:id="col_idProduk" prefWidth="93.0" text="ID" />
+                            <TableColumn fx:id="col_namaMakanan" prefWidth="292.0" text="Nama" />
+                              <TableColumn fx:id="col_hargaMakanan" prefWidth="132.0" text="Harga" />
+                              <TableColumn fx:id="col_jumlahMakanan" prefWidth="101.0" text="Jumlah" />
+                              <TableColumn fx:id="col_dayaTahan" prefWidth="162.0" text="Daya Tahan" />
+                          </columns>
+                        </TableView>
+                        <Button fx:id="btn_addMakanan" layoutX="686.0" layoutY="14.0" mnemonicParsing="false" text="Tambah Produk" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Barang">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tbl_barang" layoutX="14.0" layoutY="54.0" prefHeight="503.0" prefWidth="781.0">
+                           <columns>
+                              <TableColumn fx:id="col_namaBarang" prefWidth="187.0" text="Nama" />
+                              <TableColumn fx:id="col_hargaBarang" prefWidth="136.0" text="Harga" />
+                              <TableColumn fx:id="col_jumlahBarang" prefWidth="73.0" text="Jumlah" />
+                              <TableColumn fx:id="col_barcode" prefWidth="116.0" text="Barcode" />
+                              <TableColumn fx:id="col_expired" prefWidth="132.0" text="Expired" />
+                              <TableColumn fx:id="col_kategori" prefWidth="135.0" text="Kategori" />
+                           </columns>
+                        </TableView>
+                        <Button fx:id="btn_addBarang" layoutX="686.0" layoutY="14.0" mnemonicParsing="false" onAction="#addBarang" text="Tambah Produk" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
