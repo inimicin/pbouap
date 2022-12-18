@@ -10,11 +10,11 @@ package entity;
  * @author A S U S
  */
 public class Makanan extends Produk{
-    private int id;
+    private int id_makanan;
     private int dayaTahan;
 
-    public Makanan(String nama_produk, double harga, int jumlah, double diskon) {
-        super(nama_produk, harga, jumlah, diskon);
+    public Makanan(String id, String nama_produk, double harga, int jumlah, double diskon) {
+        super(id, nama_produk, harga, jumlah, diskon);
     }
     
     public boolean isSpoiled() {
@@ -24,15 +24,15 @@ public class Makanan extends Produk{
     /**
      * @return the id
      */
-    public int getId() {
-        return id;
+    public int getIdMakanan() {
+        return id_makanan;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(int id) {
-        this.id = id;
+    public void setIdMakanan(int id) {
+        this.id_makanan = id;
     }
 
     /**

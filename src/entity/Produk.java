@@ -14,12 +14,28 @@ import java.sql.Connection;
  * @author A S U S
  */
 public class Produk {
+
+    /**
+     * @return the id
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(String id) {
+        this.id = id;
+    }
+    private String id;
     private String nama_produk;
     private double harga;
     private int jumlah;
     private double diskon;
 
-    public Produk(String nama_produk, double harga, int jumlah, double diskon) {
+    public Produk(String id, String nama_produk, double harga, int jumlah, double diskon) {
+        this.id = id;
         this.nama_produk = nama_produk;
         this.harga = harga;
         this.jumlah = jumlah;

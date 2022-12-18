@@ -54,13 +54,19 @@ public class DaftarProdukController implements Initializable {
     @FXML
     private TableColumn<Barang, String> col_expired;
     @FXML
-    private TableColumn<Barang, ?> col_kategori;
-    @FXML
     private Button btn_addBarang;
     @FXML
     private TableView<Makanan> tbl_makanan;
     @FXML
     private TableView<Barang> tbl_barang;
+    @FXML
+    private Button btn_hapus;
+    @FXML
+    private Button btn_beli;
+    @FXML
+    private Button btn_detail;
+    
+    private String currentID;
 
     /**
      * Initializes the controller class.
@@ -68,6 +74,13 @@ public class DaftarProdukController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         refreshData();
+        
+        tbl_barang.getSelectionModel().selectedIndexProperty().addListener(listener->{
+            if(tbl_barang.getSelectionModel().getSelectedItem() != null) {
+                Barang barang = tbl_barang.getSelectionModel().getSelectedItem();
+                this.currentID = barang.getId();
+            }
+        });
     }
     
     public void refreshData(){
@@ -92,5 +105,17 @@ public class DaftarProdukController implements Initializable {
         SceneController mainControl = new SceneController();
         
         mainControl.changeScene("TambahProduk");
-    }    
+    }
+
+    @FXML
+    private void hapusItem(ActionEvent event) {
+        barangModel datamodel = new barangModel();
+        datamodel.deleteBarang(this.currentID);
+        
+        System.out.println(currentID);
+
+        refreshData();
+    }
+    
+    
 }

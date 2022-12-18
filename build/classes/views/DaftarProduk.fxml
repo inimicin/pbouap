@@ -33,17 +33,19 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tbl_barang" layoutX="14.0" layoutY="54.0" prefHeight="503.0" prefWidth="781.0">
+                        <TableView fx:id="tbl_barang" layoutX="14.0" layoutY="54.0" prefHeight="503.0" prefWidth="646.0">
                            <columns>
                               <TableColumn fx:id="col_namaBarang" prefWidth="187.0" text="Nama" />
                               <TableColumn fx:id="col_hargaBarang" prefWidth="136.0" text="Harga" />
                               <TableColumn fx:id="col_jumlahBarang" prefWidth="73.0" text="Jumlah" />
                               <TableColumn fx:id="col_barcode" prefWidth="116.0" text="Barcode" />
                               <TableColumn fx:id="col_expired" prefWidth="132.0" text="Expired" />
-                              <TableColumn fx:id="col_kategori" prefWidth="135.0" text="Kategori" />
                            </columns>
                         </TableView>
                         <Button fx:id="btn_addBarang" layoutX="686.0" layoutY="14.0" mnemonicParsing="false" onAction="#addBarang" text="Tambah Produk" />
+                        <Button fx:id="btn_hapus" layoutX="686.0" layoutY="54.0" mnemonicParsing="false" onAction="#hapusItem" prefHeight="25.0" prefWidth="101.0" text="Hapus" />
+                        <Button fx:id="btn_beli" layoutX="686.0" layoutY="121.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="101.0" text="Beli" />
+                        <Button fx:id="btn_detail" layoutX="686.0" layoutY="88.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="101.0" text="Detail" />
                      </children>
                   </AnchorPane>
             </content>

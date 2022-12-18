@@ -6,10 +6,14 @@
             <file>file:/E:/uap/src/entity/Barang.java</file>
             <file>file:/E:/uap/src/uap/Uap.java</file>
             <file>file:/E:/uap/src/entity/Produk.java</file>
+            <file>file:/E:/uap/src/db/dataModeler.java</file>
             <file>file:/E:/uap/src/controllers/DaftarProdukController.java</file>
+            <file>file:/E:/uap/src/views/TambahProduk.fxml</file>
+            <file>file:/E:/uap/src/controllers/TambahProdukController.java</file>
             <file>file:/E:/uap/src/models/barangModel.java</file>
             <file>file:/E:/uap/src/db/dbHelper.java</file>
             <file>file:/E:/uap/src/entity/Kategori.java</file>
+            <file>file:/E:/uap/src/controllers/SceneController.java</file>
         </group>
     </open-files>
 </project-private>

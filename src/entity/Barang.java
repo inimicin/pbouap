@@ -16,8 +16,8 @@ public class Barang extends Produk {
     private String expired;
     private ArrayList<Kategori> kategori;
 
-    public Barang(String barcode, String expired, ArrayList<Kategori> kategori, String nama_produk, double harga, int jumlah, double diskon) {
-        super(nama_produk, harga, jumlah, diskon);
+    public Barang(String barcode, String expired, ArrayList<Kategori> kategori, String id, String nama_produk, double harga, int jumlah, double diskon) {
+        super(id, nama_produk, harga, jumlah, diskon);
         this.barcode = barcode;
         this.expired = expired;
         this.kategori = kategori;

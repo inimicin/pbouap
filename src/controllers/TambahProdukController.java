@@ -55,6 +55,7 @@ public class TambahProdukController implements Initializable {
                 txt_barcode.getText().trim(),
                 txt_expired.getText().trim(),
                 null,
+                "",
                 txt_nama.getText().trim(),
                 Double.parseDouble(txt_harga.getText().trim()),
                 Integer.parseInt(txt_jumlah.getText().trim()),

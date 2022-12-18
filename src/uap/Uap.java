@@ -5,6 +5,7 @@
  */
 package uap;
 
+import db.dataModeler;
 import db.dbHelper;
 import java.io.IOException;
 import javafx.application.Application;
@@ -25,6 +26,9 @@ public class Uap extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
+        dataModeler modeler = new dataModeler();
+        modeler.startConnection();
+        
         dbHelper helper = new dbHelper();
         helper.createTable();
         

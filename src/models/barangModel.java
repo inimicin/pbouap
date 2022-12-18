@@ -30,14 +30,14 @@ public class barangModel {
         ObservableList<Barang> data = FXCollections.observableArrayList();
         
         try {
-            String sql = "SELECT produk.nama_produk, produk.harga, produk.jumlah, produk.diskon, barang.barcode, barang.expired"
+            String sql = "SELECT produk.nama_produk, produk.harga, produk.jumlah, produk.diskon, barang.barcode, barang.expired, produk.id_produk"
                        + " FROM produk, barang"
                        + " WHERE produk.id_produk = barang.id_produk;";
             
             ResultSet rs = conn.createStatement().executeQuery(sql);
 
             while(rs.next()){
-                data.add(new Barang(rs.getString(5), rs.getString(6), null, rs.getString(1), rs.getDouble(2), rs.getInt(3), rs.getDouble(4)));
+                data.add(new Barang(rs.getString(5), rs.getString(6), null, rs.getString(7), rs.getString(1), rs.getDouble(2), rs.getInt(3), rs.getDouble(4)));
             }
         } catch (Exception e) {
             System.out.println("Error : " + e);
@@ -74,6 +74,22 @@ public class barangModel {
             state.execute();
             
             System.out.println("Berhasil Ditambahkan!");
+        }catch(Exception e){
+            System.out.println("Error : " + e);
+        }
+    }
+    
+    public void deleteBarang(String id){
+        PreparedStatement state = null;
+        String queryProduk, queryBarang;
+        
+        try{
+            queryProduk = "DELETE FROM barang WHERE id_produk='".concat(id).concat("';DELETE FROM produk WHERE id_produk='".concat(id).concat("';"));
+
+            state = this.conn.prepareStatement(queryProduk);
+            state.execute();
+            
+            System.out.println("Berhasil Dihapus!");
         }catch(Exception e){
             System.out.println("Error : " + e);
         }
