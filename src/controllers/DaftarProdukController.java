@@ -9,6 +9,7 @@ import entity.Barang;
 import entity.Makanan;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,6 +24,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import models.barangModel;
+import models.historyModel;
 import uap.Uap;
 
 /**
@@ -67,6 +69,7 @@ public class DaftarProdukController implements Initializable {
     private Button btn_detail;
     
     private String currentID;
+    private ArrayList<Barang> listBarang;
 
     /**
      * Initializes the controller class.
@@ -95,6 +98,8 @@ public class DaftarProdukController implements Initializable {
             
             tbl_barang.setItems(null);
             tbl_barang.setItems(data);
+            
+            this.listBarang = new ArrayList<>(data);
         }catch(Exception e){
             System.out.println("Error : " + e);
         }
@@ -115,6 +120,18 @@ public class DaftarProdukController implements Initializable {
         System.out.println(currentID);
 
         refreshData();
+    }
+
+    @FXML
+    private void beliItem(ActionEvent event) {
+        double totalHarga = 0;
+        for(int i = 0; i < listBarang.size(); i++){
+            totalHarga += (listBarang.get(i).getHarga() - listBarang.get(i).getDiskon())*listBarang.get(i).getJumlah();
+        }
+        
+        historyModel model = new historyModel();
+        
+        model.addHistory(totalHarga);
     }
     
     

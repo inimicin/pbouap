@@ -71,6 +71,15 @@ public class dbHelper {
             state = con.prepareStatement(query);
             state.execute();
             
+            query = " CREATE TABLE IF NOT EXISTS \"data_pembelian\" (\n" +
+                    "	\"id\"	INTEGER NOT NULL,\n" +
+                    "	\"total_harga\"	REAL NOT NULL,\n" +
+                    "	PRIMARY KEY(\"id\" AUTOINCREMENT)\n" +
+                    ");";
+            
+            state = con.prepareStatement(query);
+            state.execute();
+            
             con.close();
         }catch(Exception e){
             System.out.println("Error : " + e);
