@@ -12,7 +12,7 @@ import java.sql.*;
  * @author A S U S
  */
 public class dbHelper {
-    Connection con = null;
+    Connection con;
     
     public Connection getConnection(){
         try{
@@ -75,6 +75,17 @@ public class dbHelper {
                     "	\"id\"	INTEGER NOT NULL,\n" +
                     "	\"total_harga\"	REAL NOT NULL,\n" +
                     "	PRIMARY KEY(\"id\" AUTOINCREMENT)\n" +
+                    ");";
+            
+            state = con.prepareStatement(query);
+            state.execute();
+            
+            query = "CREATE TABLE IF NOT EXISTS \"makanan\" (\n" +
+                    "	\"id\"	INTEGER NOT NULL,\n" +
+                    "	\"daya_tahan\"	INTEGER,\n" +
+                    "	\"id_produk\"	VARCHAR(255) NOT NULL,\n" +
+                    "	PRIMARY KEY(\"id\" AUTOINCREMENT),\n" +
+                    "	FOREIGN KEY(\"id_produk\") REFERENCES produk(id_produk)\n" +
                     ");";
             
             state = con.prepareStatement(query);

@@ -26,6 +26,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import models.barangModel;
 import models.historyModel;
+import models.makananModel;
 import uap.Uap;
 
 /**
@@ -69,8 +70,9 @@ public class DaftarProdukController implements Initializable {
     @FXML
     private Button btn_detail;
     
-    private String currentID;
+    public static String currentID;
     private ArrayList<Barang> listBarang;
+    private ArrayList<Makanan> listMakanan;
     private int currentHistoryID;
     
     @FXML
@@ -81,6 +83,8 @@ public class DaftarProdukController implements Initializable {
     private TableColumn<History, Double> col_totalHistory;
     @FXML
     private Button btn_hapusHistory;
+    @FXML
+    private Button btn_hapusMakanan;
 
     /**
      * Initializes the controller class.
@@ -96,6 +100,13 @@ public class DaftarProdukController implements Initializable {
             }
         });
         
+        tbl_makanan.getSelectionModel().selectedIndexProperty().addListener(listener->{
+            if(tbl_makanan.getSelectionModel().getSelectedItem() != null) {
+                Makanan makanan = tbl_makanan.getSelectionModel().getSelectedItem();
+                this.currentID = makanan.getId();
+            }
+        });
+        
         tbl_history.getSelectionModel().selectedIndexProperty().addListener(listener->{
             if(tbl_history.getSelectionModel().getSelectedItem() != null) {
                 History history = tbl_history.getSelectionModel().getSelectedItem();
@@ -106,8 +117,21 @@ public class DaftarProdukController implements Initializable {
     
     public void refreshData(){
         barangModel datamodel = new barangModel();
+        makananModel modelmakanan = new makananModel();
         historyModel hismodel = new historyModel();
         try{
+            ObservableList<Makanan> dataMakanan = modelmakanan.getAllData();
+            col_idProduk.setCellValueFactory(new PropertyValueFactory<>("id"));
+            col_namaMakanan.setCellValueFactory(new PropertyValueFactory<>("nama_produk"));
+            col_hargaMakanan.setCellValueFactory(new PropertyValueFactory<>("harga"));
+            col_jumlahMakanan.setCellValueFactory(new PropertyValueFactory<>("jumlah"));
+            col_dayaTahan.setCellValueFactory(new PropertyValueFactory<>("dayaTahan"));
+            
+            tbl_makanan.setItems(null);
+            tbl_makanan.setItems(dataMakanan);
+            
+            this.listMakanan = new ArrayList<>(dataMakanan);
+            
             ObservableList<Barang> data = datamodel.getAllBarang();
             col_namaBarang.setCellValueFactory(new PropertyValueFactory<>("nama_produk"));
             col_hargaBarang.setCellValueFactory(new PropertyValueFactory<>("harga"));
@@ -138,6 +162,8 @@ public class DaftarProdukController implements Initializable {
         SceneController mainControl = new SceneController();
         
         mainControl.changeScene("TambahProduk");
+        
+        refreshData();
     }
 
     @FXML
@@ -157,9 +183,14 @@ public class DaftarProdukController implements Initializable {
             totalHarga += (listBarang.get(i).getHarga() - listBarang.get(i).getDiskon())*listBarang.get(i).getJumlah();
         }
         
+        for(int i = 0; i < listMakanan.size(); i++){
+            totalHarga += (listMakanan.get(i).getHarga() - listMakanan.get(i).getDiskon())*listMakanan.get(i).getJumlah();
+        }
+        
         historyModel model = new historyModel();
         
         model.addHistory(totalHarga);
+        refreshData();
     }
 
     @FXML
@@ -167,6 +198,30 @@ public class DaftarProdukController implements Initializable {
         historyModel datamodel = new historyModel();
         
         datamodel.deleteHistory(currentHistoryID);
+        refreshData();
+    }
+
+    @FXML
+    private void detailProduk(ActionEvent event) throws IOException {
+        SceneController changer = new SceneController();
+        
+        changer.changeScene("DetailProduk");
+    }
+
+    @FXML
+    private void tambah(ActionEvent event) throws IOException {
+        SceneController mainControl = new SceneController();
+        
+        mainControl.changeScene("TambahMakanan");
+        
+        refreshData();
+    }
+
+    @FXML
+    private void hapusMakanan(ActionEvent event) {
+        makananModel datamodel = new makananModel();
+        datamodel.delete(this.currentID);
+
         refreshData();
     }
     

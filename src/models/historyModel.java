@@ -5,6 +5,7 @@
 package models;
 
 import db.dataModeler;
+import db.dbHelper;
 import entity.Barang;
 import entity.History;
 import java.sql.Connection;
@@ -21,8 +22,7 @@ public class historyModel {
      private Connection conn;
 
     public historyModel() {
-        dataModeler model = new dataModeler();
-        this.conn = model.startConnection();
+        this.conn = dataModeler.conn;
     }
     
     public ObservableList<History> getAllData(){

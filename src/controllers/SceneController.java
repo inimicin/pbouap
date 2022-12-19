@@ -18,8 +18,9 @@ import uap.Uap;
 public class SceneController {
     public void changeScene(String sceneName) throws IOException{
         Parent window1;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/".concat(sceneName).concat(".fxml")));
         
-        window1 = FXMLLoader.load(getClass().getResource("/views/".concat(sceneName).concat(".fxml")));
+        window1 = loader.load();
         Stage window1Stage;
         Scene window1Scene = new Scene(window1);
         window1Stage = Uap.stage;

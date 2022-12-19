@@ -6,6 +6,7 @@
 package models;
 
 import db.dataModeler;
+import db.dbHelper;
 import entity.Barang;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,8 +23,7 @@ public class barangModel {
     private Connection conn;
 
     public barangModel() {
-        dataModeler model = new dataModeler();
-        this.conn = model.startConnection();
+        this.conn = dataModeler.conn;
     }
     
     public ObservableList<Barang> getAllBarang() {
@@ -38,6 +38,25 @@ public class barangModel {
 
             while(rs.next()){
                 data.add(new Barang(rs.getString(5), rs.getString(6), null, rs.getString(7), rs.getString(1), rs.getDouble(2), rs.getInt(3), rs.getDouble(4)));
+            }
+        } catch (Exception e) {
+            System.out.println("Error : " + e);
+        }
+        
+        return data;
+    }
+    
+    public Barang getBarang(String id) {
+        Barang data = null;
+        try {
+            String sql = "SELECT produk.nama_produk, produk.harga, produk.jumlah, produk.diskon, barang.barcode, barang.expired, produk.id_produk"
+                       + " FROM produk, barang"
+                       + " WHERE produk.id_produk = barang.id_produk AND produk.id_produk = '".concat(id).concat("';");
+            
+            ResultSet rs = conn.createStatement().executeQuery(sql);
+
+            if(rs.next()){
+                data = new Barang(rs.getString(5), rs.getString(6), null, rs.getString(7), rs.getString(1), rs.getDouble(2), rs.getInt(3), rs.getDouble(4));
             }
         } catch (Exception e) {
             System.out.println("Error : " + e);
@@ -84,9 +103,13 @@ public class barangModel {
         String queryProduk, queryBarang;
         
         try{
-            queryProduk = "DELETE FROM barang WHERE id_produk='".concat(id).concat("';DELETE FROM produk WHERE id_produk='".concat(id).concat("';"));
+            queryProduk = "DELETE FROM barang WHERE id_produk='".concat(id).concat("';");
 
             state = this.conn.prepareStatement(queryProduk);
+            state.execute();
+            
+            queryBarang = "DELETE FROM produk WHERE id_produk='".concat(id).concat("';");
+            state = this.conn.prepareStatement(queryBarang);
             state.execute();
             
             System.out.println("Berhasil Dihapus!");

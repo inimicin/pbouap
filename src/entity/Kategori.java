@@ -11,7 +11,32 @@ import java.util.ArrayList;
  * @author adiha
  */
 public class Kategori {
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     private String nama_kategori;
+    private int id;
+
+    public Kategori(String nama_kategori) {
+        this.nama_kategori = nama_kategori;
+    }
+
+    public Kategori(String nama_kategori, int id) {
+        this.nama_kategori = nama_kategori;
+        this.id = id;
+    }
 
     /**
      * @return the nama_kategori

@@ -12,7 +12,7 @@ import java.sql.*;
  * @author A S U S
  */
 public class dataModeler {
-    Connection conn;
+    public static Connection conn;
 
     public dataModeler() {
         dbHelper helper = new dbHelper();
