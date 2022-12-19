@@ -5,9 +5,12 @@
 package models;
 
 import db.dataModeler;
+import entity.Barang;
 import entity.History;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
@@ -23,7 +26,22 @@ public class historyModel {
     }
     
     public ObservableList<History> getAllData(){
+        ObservableList<History> data = FXCollections.observableArrayList();
         
+        try {
+            String sql = "SELECT *"
+                       + " FROM data_pembelian;";
+            
+            ResultSet rs = conn.createStatement().executeQuery(sql);
+
+            while(rs.next()){
+                data.add(new History(rs.getInt(1), rs.getDouble(2)));
+            }
+        } catch (Exception e) {
+            System.out.println("Error : " + e);
+        }
+        
+        return data;
     }
     
     public void addHistory(double total) {
@@ -40,6 +58,22 @@ public class historyModel {
             state.execute();
             
             System.out.println("Berhasil Ditambahkan!");
+        }catch(Exception e){
+            System.out.println("Error : " + e);
+        }
+    }
+    
+    public void deleteHistory(int id){
+        PreparedStatement state = null;
+        String query;
+        
+        try{
+            query = "DELETE FROM data_pembelian WHERE id=".concat(Integer.toString(id)).concat(";");
+
+            state = this.conn.prepareStatement(query);
+            state.execute();
+            
+            System.out.println("Berhasil Dihapus!");
         }catch(Exception e){
             System.out.println("Error : " + e);
         }

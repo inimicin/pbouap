@@ -6,6 +6,7 @@
 package controllers;
 
 import entity.Barang;
+import entity.History;
 import entity.Makanan;
 import java.io.IOException;
 import java.net.URL;
@@ -70,6 +71,16 @@ public class DaftarProdukController implements Initializable {
     
     private String currentID;
     private ArrayList<Barang> listBarang;
+    private int currentHistoryID;
+    
+    @FXML
+    private TableView<History> tbl_history;
+    @FXML
+    private TableColumn<History, Integer> col_idHistory;
+    @FXML
+    private TableColumn<History, Double> col_totalHistory;
+    @FXML
+    private Button btn_hapusHistory;
 
     /**
      * Initializes the controller class.
@@ -84,10 +95,18 @@ public class DaftarProdukController implements Initializable {
                 this.currentID = barang.getId();
             }
         });
+        
+        tbl_history.getSelectionModel().selectedIndexProperty().addListener(listener->{
+            if(tbl_history.getSelectionModel().getSelectedItem() != null) {
+                History history = tbl_history.getSelectionModel().getSelectedItem();
+                this.currentHistoryID = history.getId();
+            }
+        });
     }
     
     public void refreshData(){
         barangModel datamodel = new barangModel();
+        historyModel hismodel = new historyModel();
         try{
             ObservableList<Barang> data = datamodel.getAllBarang();
             col_namaBarang.setCellValueFactory(new PropertyValueFactory<>("nama_produk"));
@@ -98,6 +117,15 @@ public class DaftarProdukController implements Initializable {
             
             tbl_barang.setItems(null);
             tbl_barang.setItems(data);
+            
+            this.listBarang = new ArrayList<>(data);
+            
+            ObservableList<History> data2 = hismodel.getAllData();
+            col_idHistory.setCellValueFactory(new PropertyValueFactory<>("id"));
+            col_totalHistory.setCellValueFactory(new PropertyValueFactory<>("total_harga"));
+            
+            tbl_history.setItems(null);
+            tbl_history.setItems(data2);
             
             this.listBarang = new ArrayList<>(data);
         }catch(Exception e){
@@ -132,6 +160,14 @@ public class DaftarProdukController implements Initializable {
         historyModel model = new historyModel();
         
         model.addHistory(totalHarga);
+    }
+
+    @FXML
+    private void hapusHistory(ActionEvent event) {
+        historyModel datamodel = new historyModel();
+        
+        datamodel.deleteHistory(currentHistoryID);
+        refreshData();
     }
     
     

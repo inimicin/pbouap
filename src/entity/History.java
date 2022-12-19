@@ -10,13 +10,12 @@ package entity;
  */
 public class History {
     private int id;
-    private int total_harga;
+    private double total_harga;
 
-    public History(int id, int total_harga) {
+    public History(int id, double total_harga) {
         this.id = id;
         this.total_harga = total_harga;
-    }
-    
+    }    
     
 
     /**
@@ -36,14 +35,14 @@ public class History {
     /**
      * @return the total_harga
      */
-    public int getTotal_harga() {
+    public double getTotal_harga() {
         return total_harga;
     }
 
     /**
      * @param total_harga the total_harga to set
      */
-    public void setTotal_harga(int total_harga) {
+    public void setTotal_harga(double total_harga) {
         this.total_harga = total_harga;
     }
     
